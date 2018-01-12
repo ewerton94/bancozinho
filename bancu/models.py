@@ -31,8 +31,9 @@ class ContaCorrente(Contas):
 class Poupanca(Contas):
     TIPO_CONTA = 1
 
-
 # Conta Corrente e Poupança
+class Corrente(models.Model):
+    saldo = models.DecimalFields(decimal_places = 2)
 
 # Cartão
 class Cartao(models.Model):
