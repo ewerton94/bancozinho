@@ -13,7 +13,7 @@ class ContaUsuario(models.Model):
     senha = models.IntegerField()
     corrente_ativa = models.BooleanField()
     poupanca_ativa = models.BooleanField()
-    usuario=models.ForeignKey(Usuario)
+    usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
     
 # Agência
 class Agencia(models.Model):
@@ -25,7 +25,7 @@ TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
 class Contas(models.Model):
     saldo = models.FloatField()
     historico = JSONField()
-    conta = models.ForeignKey(ContaUsuario)
+    conta = models.ForeignKey(ContaUsuario, on_delete=models.CASCADE)
 
 class ContaCorrente(Contas):
     TIPO_CONTA = 2
@@ -35,7 +35,7 @@ class Poupanca(Contas):
 
 class Cartao(models.Model):
     numero = models.IntegerField()
-    conta = models.ForeignKey(ContaUsuario)
+    conta = models.ForeignKey(ContaUsuario, on_delete=models.CASCADE)
     validade = models.CharField(max_length=10)
     codigo_seg = models.IntegerField()
     nome_abv = models.CharField(max_length=50)
