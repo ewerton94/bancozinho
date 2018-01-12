@@ -19,8 +19,9 @@ class TipoConta(models.Model):
     tipo = models.CharField(max_length = 10, choices = TIPO_CONTA, blank = True)
 
 
-
 # Conta Corrente e Poupança
+class Corrente(models.Model):
+    saldo = models.DecimalFields(decimal_places = 2)
 
 # Cartão
 class Cartao(models.Model):
