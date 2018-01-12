@@ -3,8 +3,8 @@ from django.contrib.postgres.fields import ArrayField, JSONField
 
 # Usuário
 class Usuario(models.Model):
-    nome = models.CharField()
-    endereco = models.CharField()
+    nome = models.CharField(max_length=100)
+    endereco = models.CharField(max_length=100)
     cpf = models.IntegerField(primary_key=True)
 
 # Conta Usuário
@@ -14,9 +14,10 @@ class ContaUsuario(models.Model):
     corrente_ativa = models.BooleanField()
     poupanca_ativa = models.BooleanField()
     usuario=models.ForeignKey(Usuario)
+    
 # Agência
 class Agencia(models.Model):
-    contas = ArrayField(models.ForeignKey(ContaUsuario))
+    contas = models.ManyToManyField(ContaUsuario)
 
 # Tipo Conta
 TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
@@ -31,11 +32,11 @@ class ContaCorrente(Contas):
 
 class Poupanca(Contas):
     TIPO_CONTA = 1
-    
+
 class Cartao(models.Model):
     numero = models.IntegerField()
     conta = models.ForeignKey(ContaUsuario)
-    validade = models.CharField()
+    validade = models.CharField(max_length=10)
     codigo_seg = models.IntegerField()
-    nome_abv = models.CharField()
+    nome_abv = models.CharField(max_length=50)
 
