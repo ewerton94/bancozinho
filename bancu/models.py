@@ -18,11 +18,18 @@ class Agencia(models.Model):
     pass
 
 # Tipo Conta
-class TipoConta(models.Model):
-    TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
+TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
 
-    tipo = models.CharField(max_length = 10, choices = TIPO_CONTA, blank = True)
+class Contas(models.Model):
+    saldo = models.FloatField()
+    historico = 1
+    conta = models.ForeignKey(ContaUsuario)
 
+class ContaCorrente(Contas):
+    TIPO_CONTA = 2
+
+class Poupanca(Contas):
+    TIPO_CONTA = 1
 
 
 # Conta Corrente e Poupança
