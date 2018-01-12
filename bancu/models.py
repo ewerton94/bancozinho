@@ -7,7 +7,12 @@ class Usuario(models.Model):
     cpf = models.IntegerField(primary_key=True)
 
 # Conta Usuário
-
+class ContaUsuario(models.Model):
+    numero_conta = models.IntegerField(primary_key=True)
+    senha = models.IntegerField()
+    corrente_ativa = models.BooleanField()
+    poupanca_ativa = models.BooleanField()
+    usuario=models.ForeignKey(Usuario)
 # Agência
 class Agencia(models.Model):
     pass
