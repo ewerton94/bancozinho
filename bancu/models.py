@@ -11,11 +11,12 @@ class Usuario(models.Model):
 # Agência
 class Agencia(models.Model):
     pass
+
 # Tipo Conta
 class TipoConta(models.Model):
     TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
 
-    tipo = models.CharField(max_lenght = 10, choices = TIPO_CONTA, blank = True)
+    tipo = models.CharField(max_length = 10, choices = TIPO_CONTA, blank = True)
 
 
 
