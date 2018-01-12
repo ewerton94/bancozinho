@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField, JSONField
 
 # Usuário
 class Usuario(models.Model):
@@ -15,14 +16,14 @@ class ContaUsuario(models.Model):
     usuario=models.ForeignKey(Usuario)
 # Agência
 class Agencia(models.Model):
-    pass
+    contas = ArrayField(models.ForeignKey(ContaUsuario))
 
 # Tipo Conta
 TIPO_CONTA = ((1,'Conta Poupança'),(2,'Conta Corrente'))
 
 class Contas(models.Model):
     saldo = models.FloatField()
-    historico = 1
+    historico = JSONField()
     conta = models.ForeignKey(ContaUsuario)
 
 class ContaCorrente(Contas):
@@ -30,12 +31,7 @@ class ContaCorrente(Contas):
 
 class Poupanca(Contas):
     TIPO_CONTA = 1
-
-# Conta Corrente e Poupança
-class Corrente(models.Model):
-    saldo = models.DecimalFields(decimal_places = 2)
-
-# Cartão
+    
 class Cartao(models.Model):
     numero = models.IntegerField()
     conta = models.ForeignKey(ContaUsuario)
